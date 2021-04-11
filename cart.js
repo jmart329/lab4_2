@@ -52,12 +52,35 @@ function getCart($email) {
 function deleteItem($id) {
 
     //TODO complete implementation using the product id
-    alert("cart.js/deleteItem() is not implemented")
+    $.ajax({
+        url: Url+'Cart/'+$id,
+        type: 'delete',
+        success: function () {
+            alert("Item deleted from cart.")
+            window.location.href = './cart.html';
+        },
+        error: function() {
+            alert("Unable to delete item from cart.")
+        }
+    })
 }
 
 function checkOut() {
 
     //TODO complete implementation
-    alert("cart.js/checkOut() is not implemented")
+    $.ajax({
+        url: Url+'cart',
+        type: 'put',
+        dataType: 'json',
+        data: JSON.stringify({"email": email}),
+        contentType: 'text/plain',
+        
+        success: function(data) {
+            alert("Checked out.")
+        },
+        error: function(data) {
+            alert("Could not check out, Error.")
+        }
+    });
 
 }
